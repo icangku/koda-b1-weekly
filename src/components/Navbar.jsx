@@ -53,12 +53,12 @@ function Navbar() {
           </nav>
 
           <div className="hidden md:flex items-center">
-            <a
-              href="#contact"
+            <Link
+              to="/contact"
               className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md active:scale-95"
             >
               Hire Me
-            </a>
+            </Link>
           </div>
 
           <div className="md:hidden flex items-center">

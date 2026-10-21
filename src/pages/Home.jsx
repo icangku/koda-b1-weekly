@@ -1,4 +1,7 @@
 import React from "react";
+import { Link } from "react-router";
+import { projects } from "../util/data";
+import ProjectCard from "../components/ProjectCard";
 
 function Home() {
   return (
@@ -30,18 +33,18 @@ function Home() {
               </p>
 
               <div className="flex flex-wrap items-center gap-4 pt-2">
-                <a
-                  href="#projects"
+                <Link
+                  to="/projects"
                   className="inline-flex items-center justify-center px-6 py-3.5 text-base font-medium text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg active:scale-95"
                 >
                   View My Work
-                </a>
-                <a
-                  href="#contact"
+                </Link>
+                <Link
+                  to="/contact"
                   className="inline-flex items-center justify-center px-6 py-3.5 text-base font-medium text-slate-700 hover:text-slate-900 bg-white border border-slate-300 hover:border-slate-400 rounded-xl transition-all duration-200 hover:bg-slate-50 active:scale-95"
                 >
                   Contact Me
-                </a>
+                </Link>
               </div>
 
               <div className="grid grid-cols-3 gap-6 pt-8 border-t border-slate-200/80 max-w-lg">
@@ -185,185 +188,18 @@ function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
-              <div className="relative overflow-hidden h-48 bg-slate-100">
-                <img
-                  src="https://images.unsplash.com/photo-1556742049-0a670f4a4591?auto=format&fit=crop&q=80&w=600"
-                  alt="ShopEase App"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=ShopEase'"
-                />
-                <div className="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              </div>
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">
-                    ShopEase
-                  </h3>
-                  <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                    A full-featured e-commerce platform with real-time
-                    inventory, cart management, and Stripe payment integration.
-                  </p>
-                </div>
-                <div>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
-                      React
-                    </span>
-                    <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
-                      Node.js
-                    </span>
-                    <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
-                      MongoDB
-                    </span>
-                    <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
-                      Stripe
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-4 pt-2 border-t border-slate-100">
-                    <a
-                      href="#"
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-slate-900 hover:text-brand-500 transition-colors"
-                    >
-                      Live Demo{" "}
-                      <i
-                        data-lucide="external-link"
-                        className="w-3.5 h-3.5"
-                      ></i>
-                    </a>
-                    <a
-                      href="#"
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors"
-                    >
-                      Source Code{" "}
-                      <i data-lucide="github" className="w-3.5 h-3.5"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
-              <div className="relative overflow-hidden h-48 bg-slate-100">
-                <img
-                  src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=600"
-                  alt="TaskFlow App"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=TaskFlow'"
-                />
-                <div className="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              </div>
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">
-                    TaskFlow
-                  </h3>
-                  <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                    A drag-and-drop task manager with real-time team
-                    collaboration, team workspaces, and analytics tracking.
-                  </p>
-                </div>
-                <div>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
-                      React
-                    </span>
-                    <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
-                      TypeScript
-                    </span>
-                    <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
-                      PostgreSQL
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-4 pt-2 border-t border-slate-100">
-                    <a
-                      href="#"
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-slate-900 hover:text-brand-500 transition-colors"
-                    >
-                      Live Demo{" "}
-                      <i
-                        data-lucide="external-link"
-                        className="w-3.5 h-3.5"
-                      ></i>
-                    </a>
-                    <a
-                      href="#"
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors"
-                    >
-                      Source Code{" "}
-                      <i data-lucide="github" className="w-3.5 h-3.5"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
-              <div className="relative overflow-hidden h-48 bg-amber-400">
-                <img
-                  src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600"
-                  alt="ChatSpace App"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=ChatSpace'"
-                />
-                <div className="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              </div>
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">
-                    ChatSpace
-                  </h3>
-                  <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                    Real-time messaging application with channels, direct
-                    messages, file sharing, and thread reactions.
-                  </p>
-                </div>
-                <div>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
-                      React
-                    </span>
-                    <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
-                      Socket.io
-                    </span>
-                    <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
-                      Express
-                    </span>
-                    <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
-                      Redis
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-4 pt-2 border-t border-slate-100">
-                    <a
-                      href="#"
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-slate-900 hover:text-brand-500 transition-colors"
-                    >
-                      Live Demo{" "}
-                      <i
-                        data-lucide="external-link"
-                        className="w-3.5 h-3.5"
-                      ></i>
-                    </a>
-                    <a
-                      href="#"
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors"
-                    >
-                      Source Code{" "}
-                      <i data-lucide="github" className="w-3.5 h-3.5"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {projects.map((project, index) => (
+              <ProjectCard project={project} key={index} />
+            ))}
           </div>
 
           <div className="text-center mt-12">
-            <a
-              href="#projects"
+            <Link
+              to="/projects"
               className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition-all duration-200 shadow-sm active:scale-95"
             >
               View All Projects
-            </a>
+            </Link>
           </div>
         </div>
       </section>

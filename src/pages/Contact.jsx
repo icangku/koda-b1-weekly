@@ -1,41 +1,19 @@
 import React, { useState } from "react";
+import { useLocalStorage } from "../util/localStorage";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { contactSchema } from "../util/schema/contactSchema";
 
 function Contact() {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    subject: "",
-    country: "",
-    message: "",
-    contactMethod: "Email",
-    technologies: [],
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleCheckboxChange = (tech) => {
-    setFormData((prev) => {
-      const exists = prev.technologies.includes(tech);
-      if (exists) {
-        return {
-          ...prev,
-          technologies: prev.technologies.filter((t) => t !== tech),
-        };
-      } else {
-        return {
-          ...prev,
-          technologies: [...prev.technologies, tech],
-        };
-      }
-    });
-  };
-
-  const handleReset = () => {
-    setFormData({
+  const [contacts, setContacts] = useLocalStorage("contacts", []);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(contactSchema),
+    defaultValues: {
       fullName: "",
       email: "",
       phone: "",
@@ -44,13 +22,48 @@ function Contact() {
       message: "",
       contactMethod: "Email",
       technologies: [],
-    });
-  };
+    },
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prev) => ({ ...prev, [name]: value }));
+  // };
+
+  // const handleCheckboxChange = (tech) => {
+  //   setFormData((prev) => {
+  //     const exists = prev.technologies.includes(tech);
+  //     if (exists) {
+  //       return {
+  //         ...prev,
+  //         technologies: prev.technologies.filter((t) => t !== tech),
+  //       };
+  //     } else {
+  //       return {
+  //         ...prev,
+  //         technologies: [...prev.technologies, tech],
+  //       };
+  //     }
+  //   });
+  // };
+
+  // const handleReset = () => {
+  //   setFormData({
+  //     fullName: "",
+  //     email: "",
+  //     phone: "",
+  //     subject: "",
+  //     country: "",
+  //     message: "",
+  //     contactMethod: "Email",
+  //     technologies: [],
+  //   });
+  // };
+
+  const onValid = (formData) => {
+    setContacts((prev) => [...prev, formData]);
     console.log("Form Submitted:", formData);
-    alert("Thank you! Your message has been submitted.");
+    reset();
   };
 
   const techStack = [
@@ -69,7 +82,7 @@ function Contact() {
       <section className="lg:col-span-8">
         <h2 className="text-xl font-bold text-gray-900 mb-6">Send a Message</h2>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit(onValid)} className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
               <label className="block text-xs font-semibold text-gray-700 mb-2">
@@ -78,12 +91,13 @@ function Contact() {
               <input
                 type="text"
                 name="fullName"
-                value={formData.fullName}
-                onChange={handleInputChange}
+                {...register("fullName")}
                 placeholder="Jordan Smith"
-                required
                 className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-black focus:outline-none transition"
               />
+              {errors.fullName && (
+                <p className="text-error">{errors.fullName.message}</p>
+              )}
             </div>
 
             <div>
@@ -93,12 +107,13 @@ function Contact() {
               <input
                 type="email"
                 name="email"
-                value={formData.email}
-                onChange={handleInputChange}
+                {...register("email")}
                 placeholder="you@example.com"
-                required
                 className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-black focus:outline-none transition"
               />
+              {errors.email && (
+                <p className="text-error">{errors.email.message}</p>
+              )}
             </div>
 
             <div>
@@ -108,11 +123,13 @@ function Contact() {
               <input
                 type="tel"
                 name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
+                {...register("phone")}
                 placeholder="+1 (415) 555-0100"
                 className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-black focus:outline-none transition"
               />
+              {errors.phone && (
+                <p className="text-error">{errors.phone.message}</p>
+              )}
             </div>
 
             <div>
@@ -122,12 +139,13 @@ function Contact() {
               <input
                 type="text"
                 name="subject"
-                value={formData.subject}
-                onChange={handleInputChange}
+                {...register("subject")}
                 placeholder="Project inquiry"
-                required
                 className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-black focus:outline-none transition"
               />
+              {errors.subject && (
+                <p className="text-error">{errors.subject.message}</p>
+              )}
             </div>
           </div>
 
@@ -138,10 +156,12 @@ function Contact() {
             <input
               type="text"
               name="country"
-              value={formData.country}
-              onChange={handleInputChange}
+              {...register("country")}
               className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-black focus:outline-none transition"
             />
+            {errors.country && (
+              <p className="text-error">{errors.country.message}</p>
+            )}
           </div>
 
           <div>
@@ -151,12 +171,13 @@ function Contact() {
             <textarea
               name="message"
               rows="5"
-              value={formData.message}
-              onChange={handleInputChange}
+              {...register("message")}
               placeholder="Tell me about your project or what you need help with..."
-              required
               className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-black focus:outline-none transition resize-none"
             ></textarea>
+            {errors.message && (
+              <p className="text-error">{errors.message.message}</p>
+            )}
           </div>
 
           <div>
@@ -171,15 +192,16 @@ function Contact() {
                 >
                   <input
                     type="radio"
-                    name="contactMethod"
                     value={method}
-                    checked={formData.contactMethod === method}
-                    onChange={handleInputChange}
+                    {...register("contactMethod")}
                     className="text-orange-500 focus:ring-orange-400 accent-orange-500"
                   />
                   <span>{method}</span>
                 </label>
               ))}
+              {errors.contactMethod && (
+                <p className="text-error">{errors.contactMethod.message}</p>
+              )}
             </div>
           </div>
 
@@ -195,13 +217,16 @@ function Contact() {
                 >
                   <input
                     type="checkbox"
-                    checked={formData.technologies.includes(tech)}
-                    onChange={() => handleCheckboxChange(tech)}
+                    value={tech}
+                    {...register("technologies")}
                     className="rounded border-gray-300 text-black focus:ring-black"
                   />
                   <span>{tech}</span>
                 </label>
               ))}
+              {errors.technologies && (
+                <p className="text-error">{errors.technologies.message}</p>
+              )}
             </div>
           </div>
 
@@ -214,7 +239,8 @@ function Contact() {
             </button>
             <button
               type="button"
-              onClick={handleReset}
+              onClick={() => reset()}
+              disabled={isSubmitting}
               className="border border-gray-200 hover:bg-gray-50 text-gray-700 font-medium px-6 py-3 rounded-lg text-sm transition"
             >
               Reset Form
